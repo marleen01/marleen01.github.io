@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# The 'title' variable will be set by individual pages or use a default #}
+    <title>{{ title or portfolio.name + " | " + portfolio.title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    {# Eleventy copies 'public' to the root of '_site', so paths are relative to that #}
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="hero">
+                <div class="hero-text">
+                    <h1>{{ portfolio.name }}</h1>
+                    <p class="subtitle">{{ portfolio.title }}</p>
+                    <p class="tagline">{{ portfolio.tagline }}</p>
+                    <div class="contact-info-header">
+                        <a href="mailto:{{ portfolio.contact.email }}">{{ portfolio.contact.email }}</a> |
+                        <a href="{{ portfolio.contact.github }}" target="_blank">GitHub</a> |
+                        <a href="{{ portfolio.contact.upwork }}" target="_blank">Upwork</a>
+                    </div>
+                </div>
+                {% if portfolio.profileImage %}
+                    <img src="{{ portfolio.profileImage }}" alt="{{ portfolio.name }}" class="profile-pic">
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#skills">Skills</a></li>
+                <li><a href="/#experience">Experience</a></li>
+                <li><a href="/#projects">Projects</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        {{ content | safe }} {# This is where individual page content will be injected #}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© {{ portfolio.currentYear }} {{ portfolio.name }}. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    {# Optional: Smooth Scroll Script #}
+    <script>
+        document.querySelectorAll('nav a[href^="/#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(2); // Remove '/#'
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

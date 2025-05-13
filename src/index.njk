@@ -1,0 +1,72 @@
+---
+layout: base.njk
+title: EMRE YILMAZ - Portfolio
+permalink: /index.html
+---
+
+{# This content will be injected into {{ content | safe }} in base.njk #}
+<section id="about">
+    <h2>About Me</h2>
+    <p>{{ portfolio.about }}</p>
+    {% if portfolio.strengths and portfolio.strengths.length > 0 %}
+        <h3>Key Strengths:</h3>
+        <div class="strengths-container">
+            {% for strength in portfolio.strengths %}
+                <div class="strength-item">
+                    <h4>{{ strength.name }}</h4>
+                    <p>{{ strength.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>
+
+<section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+        {% for skill in portfolio.skills %}
+            <span class="skill-tag">{{ skill }}</span>
+        {% endfor %}
+    </div>
+</section>
+
+{% if portfolio.experience and portfolio.experience.length > 0 %}
+<section id="experience">
+    <h2>Experience</h2>
+    {% for exp in portfolio.experience %}
+        <div class="experience-item card">
+            <h3>{{ exp.title }} at {{ exp.company }}</h3>
+            <p class="experience-period">{{ exp.period }} | {{ exp.location }}</p>
+            <p>{{ exp.description }}</p>
+        </div>
+    {% endfor %}
+</section>
+{% endif %}
+
+<section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+        {% for project in portfolio.projects %}
+            <div class="project-card card">
+                <h3>{{ project.name }}</h3>
+                <p>{{ project.description }}</p>
+                <p class="technologies"><strong>Technologies:</strong> {{ project.technologies.join(', ') }}</p>
+                {% if project.link %}
+                    <a href="{{ project.link }}" class="project-link" target="_blank">View on GitHub</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>Interested in collaborating or have a project in mind? I'd love to hear from you!</p>
+    <ul class="contact-links">
+        <li><strong>Email:</strong> <a href="mailto:{{ portfolio.contact.email }}">{{ portfolio.contact.email }}</a></li>
+        <li><strong>Phone:</strong> {{ portfolio.contact.phone }}</li>
+        <li><strong>GitHub:</strong> <a href="{{ portfolio.contact.github }}" target="_blank">{{ portfolio.contact.github }}</a></li>
+        <li><strong>Upwork:</strong> <a href="{{ portfolio.contact.upwork }}" target="_blank">{{ portfolio.contact.upwork }}</a></li>
+        <li><strong>Location:</strong> {{ portfolio.contact.location }}</li>
+    </ul>
+</section>

@@ -1,41 +1,19 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Node dependencies
+node_modules/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Eleventy build output directory
+_site/
 
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
+# Operating System files
 .DS_Store
-*.pem
+Thumbs.db
 
-# debug
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Environment variables (if you ever add a .env file)
+.env
+.env.*
+!.env.example
